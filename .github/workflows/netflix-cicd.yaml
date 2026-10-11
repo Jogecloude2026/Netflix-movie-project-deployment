@@ -29,7 +29,7 @@ jobs:
 
     - name: Docker build 
       run: |
-        docker build -t movie-backend ./netflix-movie_backend
+        docker build -t movie-backend ./netflix_backend
 
     - name: Docker push
       run: |
