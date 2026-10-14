@@ -27,13 +27,24 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
 
 
-    - name: Docker build 
+    - name: Backend build 
       run: |
         docker build -t movie-backend ./netflix_backend
 
-    - name: Docker push
+    - name: backend push
       run: |
         docker tag movie-backend:latest 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-backend:latest
         docker tag movie-backend:latest 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-backend:v${{github.run_number}}
         docker push 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-backend:latest
         docker push 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-backend:v${{github.run_number}}
+
+    - name: Frontend build 
+      run: |
+        docker build -t movie-frontend ./netflix_frontend
+
+    - name: Frontend push
+      run: |
+        docker tag movie-frontend:latest 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-frontend:latest
+        docker tag movie-frontend:latest 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-frontend:v${{github.run_number}}
+        docker push 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-frontend:latest
+        docker push 850919910503.dkr.ecr.eu-north-1.amazonaws.com/movie-frontend:v${{github.run_number}}
